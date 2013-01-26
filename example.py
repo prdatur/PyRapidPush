@@ -13,10 +13,10 @@ def main(api_key):
             print('Got group: ' + item['group'])
 
     # Direct notification test.
-    print(p.notify('python test '))
+    print(p.notify('python test', 'Test message'))
 
     # Scheduled test, change the given GMT time to a time in future.
-    print(p.notify('python test ', 'Test message', 2, 'default', '', '2013-01-26 14:33:00'))
+    print(p.notify('Python test', 'Test message scheduled', 2, 'default', '', '2013-01-26 14:33:00'))
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
