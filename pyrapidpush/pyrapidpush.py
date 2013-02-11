@@ -12,7 +12,7 @@ try:
 except ImportError:
         from urllib import urlencode
 
-__version__ = "1.0"
+__version__ = "1.1"
 API_SERVER  = 'rapidpush.net'
 ADD_PATH    = '/api'
 USER_AGENT  = "PyRapidPush/v%s"%__version__
@@ -20,7 +20,7 @@ USER_AGENT  = "PyRapidPush/v%s"%__version__
 class PyRapidPush(object):
     """PyRapidPush(apikey=None)
 takes 1 optional arguments:
- - (opt) apykey:      the api key string
+ - (opt) apikey:      the api key string, multiple keys seperated by comma
 """
 
     def __init__(self, apikey=None):
@@ -28,9 +28,10 @@ takes 1 optional arguments:
 
     def notify(self, title, message, priority=2, category="default", group="", schedule_at=""):
         """Sends a notification to the api key.
-takes 5 arguments:
+takes 2 required arguments:
  - (req) title:       the title        [255]
  - (req) message:     description      [10000]
+takes 4 optional arguments:
  - (opt) priority:    from 0 (lowest) to 6 (highest) (def:2)
  - (opt) category:    category name    [255] (def:default)
  - (opt) group:       The device group (def:"")
@@ -122,11 +123,4 @@ takes no arguments:
     def _parse_reponse_json(self, response):
 
         # Get the json data.
-        json_data = json.loads(response)
-
-        #Return our response format.
-        return {
-            'code': json_data['code'],
-            'desc': json_data['desc'],
-            'data': json_data['data']
-        }
+        return json.loads(response)

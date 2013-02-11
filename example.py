@@ -8,10 +8,17 @@ def main(api_key):
 
     # Retrieve group test.
     groups = p.get_groups()
-    if groups['code'] == 200:
-        for item in groups['data']:
-            print('Got group: ' + item['group'])
-
+    print (groups)
+    if groups.has_key('code'):
+        if groups['code'] == 200:
+            for item in groups['data']:
+                print('Got group: ' + item['group'])
+    else:
+        for apikey in groups:
+            print('Groups for api key: ' + apikey)
+            if groups[apikey]['code'] == 200:
+                for item in groups[apikey]['data']:
+                    print('Got group: ' + item['group'])
     # Direct notification test.
     print(p.notify('python test', 'Test message'))
 
