@@ -74,6 +74,32 @@ takes 4 optional arguments:
         # Do the api call and get the response back.
         return self.callapi('POST', ADD_PATH, post_param)
 
+    def broadcast(self, title, message, channel):
+        """Sends a broadcast notification to the channel.
+takes 3 required arguments:
+ - (req) title:       the title        [255]
+ - (req) message:     description      [10000]
+ - (req) channel:     channel          [255]
+
+ cf: https://rapidpush.net/content/view/3
+"""
+        # Build the "data"-Params.
+        datas = {
+            'title':       title[:255].encode('utf8'),
+            'message':     message[:10000].encode('utf8'),
+            'channel':     channel[:255].encode('utf8'),
+        }
+
+        # Setup API-Params.
+        post_param = {
+            'apikey' : self.apikey,
+            'command' : 'broadcast',
+            'data' : json.dumps(datas)
+        }
+
+        # Do the api call and get the response back.
+        return self.callapi('POST', ADD_PATH, post_param)
+
     def get_groups(self):
         """Get the configurated groups back.
 takes no arguments:

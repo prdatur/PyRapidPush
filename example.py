@@ -25,6 +25,9 @@ def main(api_key):
     # Scheduled test, change the given GMT time to a time in future.
     print(p.notify('Python test', 'Test message scheduled', 2, 'default', '', '2013-01-26 14:33:00'))
 
+    # Broadcast notification test.
+    print(p.broadcast('python test', 'Test message', 'MY-CHANNEL'))
+
 if __name__ == "__main__":
     if len(sys.argv) < 2:
         print('You have to provide your API-Key with the first parameter. Example: python test.py YOUR-API-KEY')
